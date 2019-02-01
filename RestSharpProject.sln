@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestSharpProject", "RestSharpProject\RestSharpProject.csproj", "{D2094DC2-4F41-4A30-8708-9F8ADD9930F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestConsoleApp", "RestConsoleApp\RestConsoleApp.csproj", "{14CC1ACD-BE78-4A9F-90EE-6E13EAADA625}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D2094DC2-4F41-4A30-8708-9F8ADD9930F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2094DC2-4F41-4A30-8708-9F8ADD9930F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2094DC2-4F41-4A30-8708-9F8ADD9930F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14CC1ACD-BE78-4A9F-90EE-6E13EAADA625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14CC1ACD-BE78-4A9F-90EE-6E13EAADA625}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14CC1ACD-BE78-4A9F-90EE-6E13EAADA625}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14CC1ACD-BE78-4A9F-90EE-6E13EAADA625}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
