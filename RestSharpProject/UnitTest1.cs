@@ -20,28 +20,52 @@ namespace RestSharpProject
 
             var request = new RestRequest("robotModels/", Method.GET);
 
-            var response = client.Execute(request);
+            IRestResponse response = null;
+            try
+            {
+                response = client.Execute(request);
+            } catch (Exception error)
+            {
+                Console.WriteLine(error);
+            }
 
-            // deserialize json to dictionary using RestSharp Deserializer (string)
+            // deserialize json to dictionary using RestSharp Deserializer (Dictionary<string, string>)
             var deserialize = new JsonDeserializer();
-            var output = deserialize.Deserialize<Dictionary<string, string>>(response);
-            var output_data = output["data"];
+            Dictionary<string, string> output = null;
+            string output_data = null;
+            try
+            {
+                output = deserialize.Deserialize<Dictionary<string, string>>(response);
+                output_data = output["data"];
+            } catch (Exception error)
+            {
+                Console.WriteLine(error);
+            }
             Console.WriteLine(output["data"] + Environment.NewLine);
             Console.WriteLine(output_data + Environment.NewLine);
 
-            //TODO: add exception
-
             // using Json.NET Deserializer (object {Newtonsoft.Json.Linq.JObject})
-            var json_object = JsonConvert.DeserializeObject(response.Content);
+            Object json_object = null;
+            try
+            {
+                json_object = JsonConvert.DeserializeObject(response.Content);
+
+            } catch (Exception error)
+            {
+                Console.WriteLine(error);
+            }
             Console.WriteLine(json_object + Environment.NewLine);
 
-            //TODO: add exception
-
             // using Json.NET Deserializer (Newtonsoft.Json.Linq.JObject)
-            JObject json_data = JObject.Parse(response.Content);
+            JObject json_data = null;
+            try
+            {
+                 json_data = JObject.Parse(response.Content);
+            } catch (Exception error)
+            {
+                Console.WriteLine(error);
+            }
             Console.WriteLine(json_data);
-
-            //TODO: add exception
 
 
             //TODO: finally add Assert
