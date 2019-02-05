@@ -113,6 +113,56 @@ namespace RestSharpProject
         }
 
         [TestMethod]
+        public void RobotModelFilter()
+        {
+            var client = new RestClient("http://jsonapi-robot-wars.herokuapp.com/");
+
+            IRestRequest request = null;
+            try
+            {
+                request = new RestRequest("robotModels/", Method.GET);
+                //request.AddParameter("filter[name]", "T-800");
+                //request.AddParameter("filter[code]", "8264");
+
+                Dictionary<string, string> parameters = new Dictionary<string, string>
+                {
+                    { "filter[name]", "R2D2" },
+                    { "filter[code]", "r2d2" }
+                };
+
+                foreach (var param in parameters)
+                {
+                    request.AddQueryParameter(param.Key, param.Value);
+                }
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error);
+            }
+
+            IRestResponse response = null;
+            try
+            {
+                response = client.Execute(request);
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error);
+            }
+
+            JObject json_data = null;
+            try
+            {
+                json_data = JObject.Parse(response.Content);
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error);
+            }
+            Console.WriteLine(json_data);
+        }
+
+        [TestMethod]
         public void CreateNewRobotModel()
         {
             var client = new RestClient("http://jsonapi-robot-wars.herokuapp.com/");
