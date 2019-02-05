@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestSharp;
-using RestSharp.Deserializers;
 using RestSharp.Serialization.Json;
 
 
@@ -24,7 +23,8 @@ namespace RestSharpProject
             try
             {
                 response = client.Execute(request);
-            } catch (Exception error)
+            }
+            catch (Exception error)
             {
                 Console.WriteLine(error);
             }
@@ -37,7 +37,8 @@ namespace RestSharpProject
             {
                 output = deserialize.Deserialize<Dictionary<string, string>>(response);
                 output_data = output["data"];
-            } catch (Exception error)
+            }
+            catch (Exception error)
             {
                 Console.WriteLine(error);
             }
@@ -50,7 +51,8 @@ namespace RestSharpProject
             {
                 json_object = JsonConvert.DeserializeObject(response.Content);
 
-            } catch (Exception error)
+            }
+            catch (Exception error)
             {
                 Console.WriteLine(error);
             }
@@ -60,8 +62,9 @@ namespace RestSharpProject
             JObject json_data = null;
             try
             {
-                 json_data = JObject.Parse(response.Content);
-            } catch (Exception error)
+                json_data = JObject.Parse(response.Content);
+            }
+            catch (Exception error)
             {
                 Console.WriteLine(error);
             }
@@ -70,5 +73,36 @@ namespace RestSharpProject
 
             //TODO: finally add Assert
         }
+
+        [TestMethod]
+        public void CreateNewRobotModel()
+        {
+            var client = new RestClient("http://jsonapi-robot-wars.herokuapp.com/");
+
+            IRestRequest request = null;
+            try
+            {
+                request = new RestRequest("robotModels/", Method.POST);
+                request.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36");
+                request.AddHeader("Connection", "keep-alive");
+                request.AddParameter("application/vnd.api+json", "{ \"data\": { \"type\": \"robotModels\", \"attributes\": {\"name\": \"Duke-2000\", \"code\": \"6523\" } } }", ParameterType.RequestBody);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+
+            IRestResponse response = null;
+            try
+            {
+                response = client.Execute(request);
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error);
+            }
+        }
     }
+
 }
