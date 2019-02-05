@@ -192,6 +192,41 @@ namespace RestSharpProject
             }
         }
 
+        [TestMethod]
+        public void DeleteRobotModel()
+        {
+            var client = new RestClient("http://jsonapi-robot-wars.herokuapp.com/");
+
+            IRestRequest request = null;
+            try
+            {
+                request = new RestRequest("robotModels/{id}", Method.DELETE);
+                request.AddUrlSegment("id", "c3e27c64-b44d-459a-9b71-18197aa4cc51");
+
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error);
+            }
+
+            IRestResponse response = null;
+            try
+            {
+                response = client.Execute(request);
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error);
+            }
+
+            if (response.IsSuccessful)
+            {
+                Console.WriteLine("Selected robot was deleted successfully");
+            }
+
+
+        }
+
     }
 
 }
