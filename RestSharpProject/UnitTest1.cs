@@ -75,6 +75,44 @@ namespace RestSharpProject
         }
 
         [TestMethod]
+        public void GetSpecificRobotModelById()
+        {
+            var client = new RestClient("http://jsonapi-robot-wars.herokuapp.com/");
+
+            IRestRequest request = null;
+            try
+            {
+                request = new RestRequest("robotModels/{id}", Method.GET);
+                request.AddUrlSegment("id", "fafefec8-4b09-4f5f-92a1-200e91a728eb");
+
+            } catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            IRestResponse response = null;
+            try
+            {
+                response = client.Execute(request);
+            } catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            JObject json_data = null;
+            try
+            {
+                json_data = JObject.Parse(response.Content);
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error);
+            }
+            Console.WriteLine(json_data);
+
+        }
+
+        [TestMethod]
         public void CreateNewRobotModel()
         {
             var client = new RestClient("http://jsonapi-robot-wars.herokuapp.com/");
@@ -85,7 +123,7 @@ namespace RestSharpProject
                 request = new RestRequest("robotModels/", Method.POST);
                 request.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36");
                 request.AddHeader("Connection", "keep-alive");
-                request.AddParameter("application/vnd.api+json", "{ \"data\": { \"type\": \"robotModels\", \"attributes\": {\"name\": \"Duke-2000\", \"code\": \"6523\" } } }", ParameterType.RequestBody);
+                request.AddParameter("application/vnd.api+json", "{ \"data\": { \"type\": \"robotModels\", \"attributes\": {\"name\": \"ISO\", \"code\": \"9901\" } } }", ParameterType.RequestBody);
             }
             catch (Exception e)
             {
@@ -103,6 +141,7 @@ namespace RestSharpProject
                 Console.WriteLine(error);
             }
         }
+
     }
 
 }
